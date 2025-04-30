@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_scanner_caicedonia/models/scan_model.dart';
 import 'package:qr_scanner_caicedonia/pages/pages.dart';
+import 'package:qr_scanner_caicedonia/providers/db_provider.dart';
 import 'package:qr_scanner_caicedonia/providers/ui_providers.dart';
 import 'package:qr_scanner_caicedonia/widgets/widgets.dart';
 
@@ -31,6 +33,11 @@ class _HomePageBody extends StatelessWidget {
     final uiProvider = Provider.of<UiProvider>(context);
     // cambiar para mostrar la pagina respectiva
     final currentIndex = uiProvider.selectedMenuOpt;
+    // TODO: temporal para leer la base de datos
+    // final tempScan = new ScanModel(valor: 'https://www.google.com');
+    // DbProvider.db.nuevoScan(tempScan);
+    // DbProvider.db.getScanbyId(14).then((scan) => print(scan?.valor));
+    DbProvider.db.getScansPorTipo('https');
     switch (currentIndex) {
       case 0:
         return MapasPage();
