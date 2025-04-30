@@ -4,44 +4,37 @@
 
 import 'dart:convert';
 
-ScanModel scanModelFromMap(String str) => ScanModel.fromMap(json.decode(str));
-
-String scanModelToMap(ScanModel data) => json.encode(data.toMap());
+ScanModel scanModelFromJson(String str) => ScanModel.fromJson(json.decode(str));
+String scanModelToJson(ScanModel data) => json.encode(data.toJson());
 
 class ScanModel {
-  int? id;
-  String? tipo;
-  String valor;
-
   ScanModel({
     this.id,
     this.tipo,
     required this.valor,
   }) {
-    if (this.valor.contains("http")) {
-      this.tipo = "http";
+    if (valor.contains("http")) {
+      tipo = "http";
     } else {
-      this.tipo = "geo";
+      tipo = "geo";
     }
   }
-
-  factory ScanModel.fromMap(Map<String, dynamic> json) => ScanModel(
-        id: json["id"],
-        tipo: json["tipo"],
-        valor: json["valor"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "tipo": tipo,
-        "valor": valor,
-      };
-
-  Map<String, dynamic> toJson() => {"id": id, "tipo": tipo, "valor": valor};
+  int? id;
+  String? tipo;
+  String valor;
+  @override
+  String toString() {
+    return 'ID: ${id} | TIPO: ${tipo} | VALOR: ${valor}';
+  }
 
   factory ScanModel.fromJson(Map<String, dynamic> json) => ScanModel(
         id: json["id"],
         tipo: json["tipo"],
         valor: json["valor"],
       );
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "tipo": tipo,
+        "valor": valor,
+      };
 }
